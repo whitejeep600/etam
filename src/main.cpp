@@ -1,9 +1,10 @@
 #include <iostream>
 
+#include "readers.h"
+
 int main() {
-    // training
-    // read train datasets
-    // preprocess
+    auto train_dataset = read_train_dataset();
+
     // apply training procedure
     // monitor the number of false positives / negatives, and whether the pattern
     // indeed remains stable.

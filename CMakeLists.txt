@@ -3,4 +3,7 @@ project(etam)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(etam src/main.cpp src/Image.h src/Image.cpp src/readers.h src/readers.cpp src/constants.h src/Dataset.cpp src/Dataset.h src/Pattern.cpp src/Pattern.h)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
+
+add_executable(etam src/main.cpp src/Image.h src/Image.cpp src/readers.h src/readers.cpp src/constants.h
+        src/Dataset.cpp src/Dataset.h src/Pattern.cpp src/Pattern.h src/EtamNetwork.cpp src/EtamNetwork.h src/Hyperplane.cpp src/Hyperplane.h src/utils.h src/utils.cpp)
