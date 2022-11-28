@@ -16,5 +16,6 @@ vector<double> multiply_elementwise(const vector<double>& vector1, double scalar
 
 void normalize(vector<double>& vector1);
 
+uint32_t hamming_distance(const vector<double>& vector1, const vector<double>& vector2);
 
 #endif //ETAM_UTILS_H

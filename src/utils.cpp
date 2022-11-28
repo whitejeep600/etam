@@ -44,3 +44,13 @@ void normalize(vector<double>& vector1) {
         i /= norm;
     }
 }
+
+uint32_t hamming_distance(const vector<double>& vector1, const vector<double>& vector2){
+    uint32_t result = 0;
+    for(uint32_t i = 0; i < vector1.size(); ++i){
+        if(vector1[i] != vector2[i]){
+            ++result;
+        }
+    }
+    return result;
+}

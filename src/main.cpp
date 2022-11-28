@@ -6,7 +6,9 @@
 int main() {
     auto train_dataset = read_train_dataset();
     auto network = create_for_dataset(train_dataset);
-    network.test_stability(train_dataset);
+    network.test_stability(train_dataset, 3); // all stable for 3
+    // maybe still check those hamming distances
+    
     // apply training procedure
     // monitor the number of false positives / negatives, and whether the pattern
     // indeed remains stable.

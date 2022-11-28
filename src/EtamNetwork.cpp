@@ -1,5 +1,6 @@
 #include <iostream>
 #include "EtamNetwork.h"
+#include "utils.h"
 
 EtamNetwork create_for_dataset(const Dataset& dataset){
     auto network = EtamNetwork();
@@ -21,11 +22,17 @@ bool EtamNetwork::vector_stable(const vector<double> &vector1) const {
     return vector1 == this->apply(vector1);
 }
 
-void EtamNetwork::test_stability(const Dataset &dataset) const {
+void EtamNetwork::test_stability(const Dataset &dataset, uint32_t applications) const {
     uint32_t stable = 0;
     uint32_t unstable = 0;
-    for(const auto& p: dataset.patterns){
-        if(this->vector_stable(p.image.pixels)){
+    for(const auto& p: dataset.patterns) {
+        auto v = vector<double>(p.image.pixels);
+        for(uint32_t i = 0; i < applications; ++i){
+            v = this->apply(v);
+        }
+        if(this->vector_stable(v)){
+            // in any case might be worth experimenting with; no or almost no pattern is stable right away
+            // but after two applications, stable 38428, unstable 21572.
             ++stable;
         }
         else{

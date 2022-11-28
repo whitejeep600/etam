@@ -14,7 +14,7 @@ Neuron create_ith(const Dataset& dataset, uint32_t i){
     }
     normalize(coefficients_vector);
     assert(0.98 < euclidean_norm(coefficients_vector));
-    assert(0.102 > euclidean_norm(coefficients_vector));
+    assert(1.02 > euclidean_norm(coefficients_vector));
     return Neuron(Hyperplane{coefficients_vector, 0});
 }
 
