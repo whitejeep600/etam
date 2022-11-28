@@ -10,10 +10,10 @@ pixels{IMAGE_SIZE, 0}
         for(uint32_t column = 0; column < IMAGE_WIDTH; ++column){
             auto new_element = (double) bytes[IMAGE_WIDTH * row + column];
             if(new_element == 0){
-                pixels[IMAGE_WIDTH * row + column] = -1;
+                pixels[IMAGE_WIDTH * row + column] = -1.0;
             }
             else{
-                pixels[IMAGE_WIDTH * row + column] = 1;
+                pixels[IMAGE_WIDTH * row + column] = 1.0;
             }
         }
     }

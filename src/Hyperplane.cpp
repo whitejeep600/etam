@@ -2,6 +2,7 @@
 #include <cassert>
 
 #include "Hyperplane.h"
+#include "utils.h"
 
 Hyperplane::Hyperplane(const vector<double>& coefficients_vector, double constant_term)
         :
