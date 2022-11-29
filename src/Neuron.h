@@ -11,6 +11,7 @@ class Neuron {
 public:
     explicit Neuron(Hyperplane h): h(std::move(h)) {}
     double apply(const vector<double>& input) const;
+    void retrain(Dataset& dataset);
 };
 
 Neuron create_ith(const Dataset& dataset, uint32_t i);

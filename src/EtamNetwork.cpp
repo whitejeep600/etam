@@ -1,8 +1,9 @@
 #include <iostream>
+
 #include "EtamNetwork.h"
 #include "utils.h"
 
-EtamNetwork create_for_dataset(const Dataset& dataset){
+EtamNetwork create_initial_for_dataset(const Dataset& dataset){
     auto network = EtamNetwork();
     for(uint32_t i = 0; i < IMAGE_SIZE; ++i){
         network.neurons.push_back(create_ith(dataset, i));
@@ -10,10 +11,18 @@ EtamNetwork create_for_dataset(const Dataset& dataset){
     return network;
 }
 
+EtamNetwork create_for_dataset(Dataset& dataset){
+    auto network = create_initial_for_dataset(dataset);
+    for(auto& n: network.neurons){
+        n.retrain(dataset);
+    }
+    return network;
+}
+
 vector<double> EtamNetwork::apply(const vector<double>& input) const {
     auto result = vector<double>();
     for(uint32_t i = 0; i < IMAGE_SIZE; ++i){
-        result.push_back(neurons[i].apply(input));
+        result.push_back(this->neurons[i].apply(input));
     }
     return result;
 }
@@ -33,11 +42,13 @@ void EtamNetwork::test_stability(const Dataset &dataset, uint32_t applications) 
         if(this->vector_stable(v)){
             // in any case might be worth experimenting with; no or almost no pattern is stable right away
             // but after two applications, stable 38428, unstable 21572.
+            // after three, all of them, actually
             ++stable;
         }
         else{
             ++unstable;
         }
+        //cout << hamming_distance(p.image.pixels, v) << "\n";
     }
     cout << "stable: " << stable << ", unstable: " << unstable << ".\n";
 }

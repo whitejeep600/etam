@@ -3,12 +3,21 @@
 #include "readers.h"
 #include "EtamNetwork.h"
 
+// todo no to sprobujmy jakos juz to przetestowac bez retrenowania. tam porozpoznawac jakies patterny
+
+// mapowac patterny na ich stabilne odpowiedniki po retrenowaniu
+
 int main() {
     auto train_dataset = read_train_dataset();
     auto network = create_for_dataset(train_dataset);
-    network.test_stability(train_dataset, 3); // all stable for 3
-    // maybe still check those hamming distances
-    
+
+    //network.test_stability(train_dataset, 3);
+    // all stable for 3, hamming distances mostly in range 80-200, most about 120 I'd say
+
+    // auto test_dataset = read_test_dataset();
+    // network.test_stability(test_dataset, 3);
+    // actually also stable for 3
+
     // apply training procedure
     // monitor the number of false positives / negatives, and whether the pattern
     // indeed remains stable.
