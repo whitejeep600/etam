@@ -1,4 +1,7 @@
 #include <cassert>
+#include <iostream>
+#include <cmath>
+
 #include "Neuron.h"
 #include "utils.h"
 
@@ -22,8 +25,39 @@ double Neuron::apply(const vector<double> &input) const {
     return h.on_positive_side(input) ? 1 : -1;
 }
 
-void Neuron::retrain(Dataset &dataset) {
-    if(dataset.patterns.size() == 2137){
-        h.constant_term += 420;
+void Neuron::retrain(Dataset &dataset, uint32_t i) {
+    if(dataset.ith_bit_the_same_for_all(i, -1.0)){
+        h.constant_term = (double) IMAGE_HEIGHT;
+        return;
     }
+    if(dataset.ith_bit_the_same_for_all(i, 1.0)){
+        h.constant_term = -1.0 * (double) IMAGE_HEIGHT;
+        return;
+    }
+    auto positive = dataset.get_positive_minimal_distance_pattern(this->h, i);
+    auto negative = dataset.get_negative_maximal_distance_pattern(this->h, i);
+    double dp = this->h.distance_to_point(positive->image.pixels);
+    double dn = this->h.distance_to_point(negative->image.pixels);
+    double new_minimal_distance = (dp - dn) / 2.0;
+    double minimal_distance;
+    uint32_t run_iterations = 0;
+    do{
+        minimal_distance = new_minimal_distance;
+        this->h.constant_term += (dp + dn) / 2.0;
+        //     find rotated hyperplane
+        auto new_hyperplane = rotate(this->h, *positive, *negative);
+        positive = dataset.get_positive_minimal_distance_pattern(this->h, i);
+        negative = dataset.get_negative_maximal_distance_pattern(this->h, i);
+        dp = new_hyperplane.distance_to_point(positive->image.pixels);
+        dn = new_hyperplane.distance_to_point(negative->image.pixels);
+        new_minimal_distance = (dp - dn) / 2.0;
+        if(new_minimal_distance > minimal_distance and run_iterations < 10){
+            this->h = new_hyperplane;
+            ++run_iterations;
+        }
+        else{
+            break;
+        }
+    }
+    while(2137);
 }

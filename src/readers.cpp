@@ -10,7 +10,7 @@
 
 using namespace std;
 
-vector<label> read_labels(const char* filename, uint32_t expected_num_labels){
+vector<Label> read_labels(const char* filename, uint32_t expected_num_labels){
     ifstream f(filename, ios::binary | ios::ate);
     f.seekg(0, std::ifstream::end);
     uint32_t length = f.tellg();
@@ -26,9 +26,9 @@ vector<label> read_labels(const char* filename, uint32_t expected_num_labels){
     uint32_t num_labels = ntohl(*(uint32_t*) (buffer + 4));
     assert(num_labels == expected_num_labels);
 
-    vector<label> labels;
+    vector<Label> labels;
 
-    label new_label;
+    Label new_label;
     for(uint32_t i = 0; i < num_labels; ++i){
         new_label = *(uint8_t*) (buffer + 8 + i);
         assert(0 <= new_label);
@@ -40,10 +40,10 @@ vector<label> read_labels(const char* filename, uint32_t expected_num_labels){
     return labels;
 }
 
-std::vector<label> read_train_labels(){
+std::vector<Label> read_train_labels(){
     return read_labels("../data/train_labels", 60000);
 }
-std::vector<label> read_test_labels(){
+std::vector<Label> read_test_labels(){
     return read_labels("../data/test_labels", 10000);
 }
 

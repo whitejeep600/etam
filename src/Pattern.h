@@ -6,8 +6,8 @@
 class Pattern{
 public:
     Image image;
-    label l;
-    explicit Pattern(Image  image, label l);
+    Label label;
+    explicit Pattern(Image  image, Label l);
     bool operator==(const Pattern& that) const;
 };
 

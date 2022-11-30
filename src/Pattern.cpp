@@ -3,11 +3,11 @@
 #include <utility>
 
 
-Pattern::Pattern(Image image, label l):
+Pattern::Pattern(Image image, Label l):
         image(std::move(image)),
-        l(l)
+        label(l)
 {}
 
 bool Pattern::operator==(const Pattern& that) const {
-    return this->image == that.image and this->l == that.l;
+    return this->image == that.image and this->label == that.label;
 }

@@ -2,6 +2,7 @@
 #define ETAM_HYPERPLANE_H
 
 #include <vector>
+#include "Pattern.h"
 
 using namespace std;
 
@@ -14,6 +15,8 @@ public:
     bool on_positive_side(const vector<double>& vec) const;
     double distance_to_point(const vector<double>& vec) const;
 };
+
+Hyperplane rotate(const Hyperplane &h, const Pattern &positive, const Pattern &negative);
 
 
 #endif //ETAM_HYPERPLANE_H
