@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cassert>
+#include <iostream>
 
 #include "EtamNetwork.h"
 #include "utils.h"
@@ -23,6 +24,7 @@ void EtamNetwork::create_patterns_mapping(const Dataset &dataset) {
 EtamNetwork create_for_dataset(Dataset& dataset){
     auto network = create_initial_for_dataset(dataset);
     for(uint32_t i = 0; i < IMAGE_SIZE; ++i){
+        cout << "starting neuron " << i << "\n";
         network.neurons[i].retrain(dataset, i);
     }
     network.create_patterns_mapping(dataset);

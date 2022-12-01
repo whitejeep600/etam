@@ -31,5 +31,6 @@ Hyperplane rotate(const Hyperplane &h, const Pattern &positive, const Pattern &n
     for(uint32_t i = 0; i < IMAGE_SIZE; ++i){
         new_hyperplane.coefficients_vector[i] += ALPHA * (positive.image.pixels[i] - negative.image.pixels[i]);
     }
+    normalize(new_hyperplane.coefficients_vector);
     return new_hyperplane;
 }

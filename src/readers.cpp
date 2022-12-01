@@ -41,10 +41,10 @@ vector<Label> read_labels(const char* filename, uint32_t expected_num_labels){
 }
 
 std::vector<Label> read_train_labels(){
-    return read_labels("../data/train_labels", 60000);
+    return read_labels("data/train_labels", 60000);
 }
 std::vector<Label> read_test_labels(){
-    return read_labels("../data/test_labels", 10000);
+    return read_labels("data/test_labels", 10000);
 }
 
 vector<Image> read_images(const char* filename, uint32_t expected_num_images){
@@ -78,10 +78,10 @@ vector<Image> read_images(const char* filename, uint32_t expected_num_images){
 }
 
 std::vector<Image> read_train_images(){
-    return read_images("../data/train_images", 60000);
+    return read_images("data/train_images", 60000);
 }
 std::vector<Image> read_test_images(){
-    return read_images("../data/test_images", 10000);
+    return read_images("data/test_images", 10000);
 }
 
 Dataset read_train_dataset(){

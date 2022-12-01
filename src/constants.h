@@ -11,6 +11,6 @@ const uint32_t IMAGE_HEIGHT = 28;
 const uint32_t IMAGE_WIDTH = 28;
 const uint32_t IMAGE_SIZE =  IMAGE_HEIGHT * IMAGE_WIDTH;
 
-const double ALPHA = 1.0 / 16;
+const double ALPHA = 1.0 / 64;
 
 #endif // ETAM_CONSTANTS_H
