@@ -17,8 +17,7 @@ Hyperplane::Hyperplane()
 {}
 
 bool Hyperplane::on_positive_side(const vector<double>& vec) const {
-    auto dupa = dot_product(coefficients_vector, vec);
-    return dupa > constant_term;
+    return dot_product(coefficients_vector, vec) > constant_term;
 }
 
 double Hyperplane::distance_to_point(const vector<double> &vec) const {

@@ -11,6 +11,7 @@ int main() {
     network.test_on_dataset(test_dataset);
     // initial result without retraining: correct: 2099, incorrect: 7901, unrecognized: 0
     // after first retraining, 980 correct xd
+    // after second one, most unrecognized
 
     //network.test_stability(train_dataset, 3);
     // all stable for 3, hamming distances mostly in range 80-200, most about 120 I'd say
