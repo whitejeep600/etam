@@ -26,11 +26,11 @@ double Neuron::apply(const vector<double> &input) const {
 }
 
 void Neuron::retrain(Dataset &dataset, uint32_t i) {
-    if(nullptr == dataset.get_positive_minimal_distance_pattern(h, 1.0)){
+    if(dataset.ith_bit_the_same_for_all(i, -1.0)){
         h.constant_term = (double) IMAGE_HEIGHT;
         return;
     }
-    if(nullptr == dataset.get_negative_maximal_distance_pattern(h, 1.0)){
+    if(dataset.get_negative_maximal_distance_pattern(i, 1.0)){
         h.constant_term = -1.0 * (double) IMAGE_HEIGHT;
         return;
     }

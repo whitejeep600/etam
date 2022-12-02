@@ -35,11 +35,10 @@ struct key
 };
 
 Pattern *Dataset::get_positive_minimal_distance_pattern(const Hyperplane &h, uint32_t i) {
-    i += 1;
     auto sort_key = key(h);
     std::sort(patterns.begin(), patterns.end(), sort_key);
     uint32_t index = 0;
-    while(index < patterns.size() and not h.on_positive_side(patterns[index].image.pixels)){
+    while(1.0 != patterns[index].image.pixels[i]){
         ++index;
     }
     if(index == patterns.size()){
@@ -49,11 +48,10 @@ Pattern *Dataset::get_positive_minimal_distance_pattern(const Hyperplane &h, uin
 }
 
 Pattern *Dataset::get_negative_maximal_distance_pattern(const Hyperplane &h, uint32_t i) {
-    i += 1;
     auto sort_key = key(h);
     std::sort(patterns.begin(), patterns.end(), sort_key);
     uint32_t index = patterns.size() - 1;
-    while(index > 0 and h.on_positive_side(patterns[index].image.pixels)){
+    while(-1.0 != patterns[index].image.pixels[i]){
         --index;
     }
     if(index == 0){
