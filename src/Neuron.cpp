@@ -30,7 +30,7 @@ void Neuron::retrain(Dataset &dataset, uint32_t i) {
         h.constant_term = (double) IMAGE_HEIGHT;
         return;
     }
-    if(dataset.get_negative_maximal_distance_pattern(i, 1.0)){
+    if(dataset.ith_bit_the_same_for_all(i, 1.0)){
         h.constant_term = -1.0 * (double) IMAGE_HEIGHT;
         return;
     }
@@ -47,8 +47,8 @@ void Neuron::retrain(Dataset &dataset, uint32_t i) {
         minimal_distance = new_minimal_distance;
         this->h.constant_term += (dp + dn) / 2.0;
         auto new_hyperplane = rotate(this->h, *positive, *negative);
-        positive = dataset.get_positive_minimal_distance_pattern(this->h, i);
-        negative = dataset.get_negative_maximal_distance_pattern(this->h, i);
+        positive = dataset.get_positive_minimal_distance_pattern(new_hyperplane, i);
+        negative = dataset.get_negative_maximal_distance_pattern(new_hyperplane, i);
         dp = new_hyperplane.distance_to_point(positive->image.pixels);
         dn = new_hyperplane.distance_to_point(negative->image.pixels);
         if(dp > dn) new_minimal_distance = (dp - dn) / 2.0;

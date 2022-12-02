@@ -21,7 +21,7 @@ bool Hyperplane::on_positive_side(const vector<double>& vec) const {
 }
 
 double Hyperplane::distance_to_point(const vector<double> &vec) const {
-    return dot_product(coefficients_vector, vec) + constant_term /
+    return (dot_product(coefficients_vector, vec) - constant_term) /
            euclidean_norm(coefficients_vector);
 }
 

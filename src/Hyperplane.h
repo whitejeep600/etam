@@ -10,6 +10,7 @@ class Hyperplane{
 public:
     vector<double> coefficients_vector;
     double constant_term;
+    // the equation describing the hyperplane is coefficients_vector^{T} * x = constant_term
     Hyperplane(const vector<double>& coefficients_vector, double constant_term);
     Hyperplane();
     bool on_positive_side(const vector<double>& vec) const;
