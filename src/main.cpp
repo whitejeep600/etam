@@ -13,6 +13,9 @@ int main() {
     // after first retraining, 980 correct xd
     // after second one, most unrecognized
 
+    // correct: 99, incorrect: 713, unrecognized: 9188.
+
+
     //network.test_stability(train_dataset, 3);
     // all stable for 3, hamming distances mostly in range 80-200, most about 120 I'd say
 
