@@ -10,10 +10,13 @@ int main() {
     auto test_dataset = read_test_dataset();
     network.test_on_dataset(test_dataset);
     // initial result without retraining: correct: 2099, incorrect: 7901, unrecognized: 0
-    // after first retraining, 980 correct xd
-    // after second one, most unrecognized
+
+    // training according to the algorithm, most unrecognized
 
     // correct: 99, incorrect: 713, unrecognized: 9188.
+
+    // training with choosing closest patterns above/below:
+    // correct: 973, incorrect: 9027, unrecognized: 0.
 
 
     //network.test_stability(train_dataset, 3);
