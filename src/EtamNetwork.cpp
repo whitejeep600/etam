@@ -14,6 +14,10 @@ EtamNetwork create_initial_for_dataset(const Dataset& dataset){
 }
 
 void EtamNetwork::create_patterns_mapping(const Dataset &dataset) {
+    for(uint32_t applications = 0; applications < 10; ++applications){
+        cout << "testing stability for " << applications << " applications\n";
+        this->test_stability(dataset, applications);
+    }
     for(const auto& p: dataset.patterns){
         const uint32_t MAX_APPLICATIONS = 2137;
         auto v = this->stabilize(p.image.pixels, MAX_APPLICATIONS);

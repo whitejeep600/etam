@@ -3,6 +3,7 @@
 #include "readers.h"
 #include "EtamNetwork.h"
 
+// todo zobaczyc czy da sie ustabilizowac, jak tak to przetestowac, jak bedzie trzeba to tez z tą drugą heurą
 int main() {
     auto train_dataset = read_train_dataset();
     auto network = create_for_dataset(train_dataset);
