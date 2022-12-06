@@ -69,7 +69,7 @@ vector<double> EtamNetwork::stabilize(const vector<double> &vector1, uint32_t ap
         v = this->apply(v);
         ++i;
     }
-    assert(i <= applications);
+    assert(this->vector_stable(v));
     return v;
 }
 
