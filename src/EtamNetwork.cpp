@@ -14,13 +14,20 @@ EtamNetwork create_initial_for_dataset(const Dataset& dataset){
 }
 
 void EtamNetwork::create_patterns_mapping(const Dataset &dataset) {
-    for(uint32_t applications = 0; applications < 10; ++applications){
+    uint32_t applications = 0;
+    for(; applications < 10; ++applications){
         cout << "testing stability for " << applications << " applications\n";
-        this->test_stability(dataset, applications);
+        if(this->test_stability(dataset, applications)){
+            cout << "stable after " << applications << " applications.\n";
+            break;
+        }
+    }
+    if(applications == 10){
+        cout << "not stable after " << applications << " applications.\n";
     }
     for(const auto& p: dataset.patterns){
         const uint32_t MAX_APPLICATIONS = 2137;
-        auto v = this->stabilize(p.image.pixels, MAX_APPLICATIONS);
+        auto v = this->stabilize(p.image.pixels, applications);
         this->patterns_mapping.insert({v, p.label});
     }
 }
@@ -47,7 +54,7 @@ bool EtamNetwork::vector_stable(const vector<double> &vector1) const {
     return vector1 == this->apply(vector1);
 }
 
-void EtamNetwork::test_stability(const Dataset &dataset, uint32_t applications) const {
+bool EtamNetwork::test_stability(const Dataset &dataset, uint32_t applications) const {
     uint32_t stable = 0;
     uint32_t unstable = 0;
     for(const auto& p: dataset.patterns) {
@@ -64,6 +71,7 @@ void EtamNetwork::test_stability(const Dataset &dataset, uint32_t applications) 
         //cout << hamming_distance(p.image.pixels, v) << "\n";
     }
     cout << "stable: " << stable << ", unstable: " << unstable << ".\n";
+    return unstable == 0;
 }
 
 vector<double> EtamNetwork::stabilize(const vector<double> &vector1, uint32_t applications) const {
@@ -73,7 +81,7 @@ vector<double> EtamNetwork::stabilize(const vector<double> &vector1, uint32_t ap
         v = this->apply(v);
         ++i;
     }
-    assert(this->vector_stable(v));
+    //assert(this->vector_stable(v));
     return v;
 }
 

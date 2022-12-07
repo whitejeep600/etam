@@ -18,7 +18,7 @@ public:
     EtamNetwork(): neurons(), patterns_mapping() {};
     vector<double> apply(const vector<double>& input) const;
     bool vector_stable(const vector<double>& vector1) const;
-    void test_stability(const Dataset& dataset, uint32_t applications) const;
+    bool test_stability(const Dataset& dataset, uint32_t applications) const;
     void create_patterns_mapping(const Dataset& dataset);
     vector<double> stabilize(const vector<double>& vector1, uint32_t applications) const;
     Label recognize(const vector<double>& vector1) const;
