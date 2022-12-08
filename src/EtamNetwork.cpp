@@ -14,17 +14,17 @@ EtamNetwork create_initial_for_dataset(const Dataset& dataset){
 }
 
 void EtamNetwork::create_patterns_mapping(const Dataset &dataset) {
-//    uint32_t applications = 0;
-//    for(; applications < 10; ++applications){
-//        cout << "testing stability for " << applications << " applications\n";
-//        if(this->test_stability(dataset, applications)){
-//            cout << "stable after " << applications << " applications.\n";
-//            break;
-//        }
-//    }
-//    if(applications == 10){
-//        cout << "not stable after " << applications << " applications.\n";
-//    }
+    uint32_t applications = 0;
+    for(; applications < 15; ++applications){
+        cout << "testing stability for " << applications << " applications\n";
+        if(this->test_stability(dataset, applications)){
+            cout << "stable after " << applications << " applications.\n";
+            break;
+        }
+    }
+    if(applications == 15){
+        cout << "not stable after " << applications << " applications.\n";
+    }
     for(const auto& p: dataset.patterns){
         const uint32_t MAX_APPLICATIONS = 12;
         auto v = this->stabilize(p.image.pixels, MAX_APPLICATIONS);
@@ -86,7 +86,7 @@ vector<double> EtamNetwork::stabilize(const vector<double> &vector1, uint32_t ap
 }
 
 Label EtamNetwork::recognize(const vector<double> &vector1) const {
-    const uint32_t MAX_APPLICATIONS = 12;
+    const uint32_t MAX_APPLICATIONS = 15;
     auto stabilized = this->stabilize(vector1, MAX_APPLICATIONS);
     try{
         return this->patterns_mapping.at(stabilized);

@@ -9,16 +9,16 @@ int main() {
     auto network = create_for_dataset(train_dataset);
 
     auto test_dataset = read_test_dataset();
-//    cout << "testing stability on test patterns\n";
+    cout << "testing stability on test patterns\n";
 
-//    uint32_t applications = 0;
-//    for(; applications < 10; ++applications){
-//        cout << "testing stability for " << applications << " applications\n";
-//        if(network.test_stability(test_dataset, applications)){
-//            cout << "stable after " << applications << " applications.\n";
-//            break;
-//        }
-//    }
+    uint32_t applications = 0;
+    for(; applications < 10; ++applications){
+        cout << "testing stability for " << applications << " applications\n";
+        if(network.test_stability(test_dataset, applications)){
+            cout << "stable after " << applications << " applications.\n";
+            break;
+        }
+    }
     network.test_on_dataset(test_dataset);
     // initial result without retraining: correct: 2099, incorrect: 7901, unrecognized: 0
 
@@ -37,6 +37,9 @@ int main() {
 
     //network.test_stability(train_dataset, 3);
     // all stable for 3, hamming distances mostly in range 80-200, most about 120 I'd say
+
+    // lr 1/128 with stabilizing in 12 iterations:
+    // correct: 2719, incorrect: 7279, unrecognized: 2.
 
     // auto test_dataset = read_test_dataset();
     // network.test_stability(test_dataset, 3);
