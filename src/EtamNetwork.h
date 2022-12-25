@@ -13,8 +13,6 @@ class EtamNetwork {
 public:
     vector<Neuron> neurons;
     map<vector<double>, Label> patterns_mapping;
-    // what else? do we remember a mapping from stable states
-    // (e.g. obtained from patterns after 3 applications) to labels?
     EtamNetwork(): neurons(), patterns_mapping() {};
     vector<double> apply(const vector<double>& input) const;
     bool vector_stable(const vector<double>& vector1) const;
@@ -26,7 +24,7 @@ public:
 
 };
 
-EtamNetwork create_for_dataset(Dataset& dataset);
+EtamNetwork create_for_dataset(Dataset&& dataset);
 
 
 #endif //ETAM_ETAMNETWORK_H

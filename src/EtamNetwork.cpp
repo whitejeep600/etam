@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cassert>
-#include <iostream>
 
 #include "EtamNetwork.h"
 #include "utils.h"
@@ -14,17 +12,6 @@ EtamNetwork create_initial_for_dataset(const Dataset& dataset){
 }
 
 void EtamNetwork::create_patterns_mapping(const Dataset &dataset) {
-    uint32_t applications = 0;
-    for(; applications < 15; ++applications){
-        cout << "testing stability for " << applications << " applications\n";
-        if(this->test_stability(dataset, applications)){
-            cout << "stable after " << applications << " applications.\n";
-            break;
-        }
-    }
-    if(applications == 15){
-        cout << "not stable after " << applications << " applications.\n";
-    }
     for(const auto& p: dataset.patterns){
         const uint32_t MAX_APPLICATIONS = 12;
         auto v = this->stabilize(p.image.pixels, MAX_APPLICATIONS);
@@ -32,10 +19,9 @@ void EtamNetwork::create_patterns_mapping(const Dataset &dataset) {
     }
 }
 
-EtamNetwork create_for_dataset(Dataset& dataset){
+EtamNetwork create_for_dataset(Dataset&& dataset){
     auto network = create_initial_for_dataset(dataset);
     for(uint32_t i = 0; i < IMAGE_SIZE; ++i){
-        cout << "starting neuron " << i << "\n";
         network.neurons[i].retrain(dataset, i);
     }
     network.create_patterns_mapping(dataset);
@@ -60,15 +46,11 @@ bool EtamNetwork::test_stability(const Dataset &dataset, uint32_t applications) 
     for(const auto& p: dataset.patterns) {
         auto v = this->stabilize(p.image.pixels, applications);
         if(this->vector_stable(v)){
-            // in any case might be worth experimenting with; no or almost no pattern is stable right away
-            // but after two applications, stable 38428, unstable 21572.
-            // after three, all of them, actually
             ++stable;
         }
         else{
             ++unstable;
         }
-        //cout << hamming_distance(p.image.pixels, v) << "\n";
     }
     cout << "stable: " << stable << ", unstable: " << unstable << ".\n";
     return unstable == 0;
@@ -81,7 +63,6 @@ vector<double> EtamNetwork::stabilize(const vector<double> &vector1, uint32_t ap
         v = this->apply(v);
         ++i;
     }
-    //assert(this->vector_stable(v));
     return v;
 }
 

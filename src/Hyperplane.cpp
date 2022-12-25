@@ -1,4 +1,3 @@
-#include <valarray>
 #include <cassert>
 
 #include "Hyperplane.h"

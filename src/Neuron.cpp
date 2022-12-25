@@ -1,6 +1,4 @@
 #include <cassert>
-#include <iostream>
-#include <cmath>
 
 #include "Neuron.h"
 #include "utils.h"
